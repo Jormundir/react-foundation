@@ -1,8 +1,13 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   context: path.join(__dirname, 'app'),
-  entry: './Client',
+  entry: [
+    "webpack-dev-server/client?http://localhost:8080",
+    "webpack/hot/dev-server",
+    './Client'
+  ],
   module: {
     loaders: [
       {
@@ -20,7 +25,13 @@ module.exports = {
     modulesDirectories: ['node_modules', 'app']
   },
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'build'),
+    publicPath: '/build/',
     filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: './build',
+    hot: true,
+    historyApiFallback: true
   }
 };

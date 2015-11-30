@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_PATH=./app node ./babel.server.js",
-    "webpack": "start webpack dev server at /dist",
-    "develop": "start both node server and webpack server",
+    "develop": "start dev and node server",
+    "bundle": "create production bundle",
     "test": "NODE_PATH=./app jest"
   },
   "author": "Charles Bryan",
@@ -26,7 +26,8 @@
     "babel-jest": "^6.0.1",
     "babel-loader": "^6.2.0",
     "jest-cli": "^0.7.1",
-    "webpack": "^1.12.6"
+    "webpack": "^1.12.6",
+    "webpack-dev-server": "^1.14.0"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",

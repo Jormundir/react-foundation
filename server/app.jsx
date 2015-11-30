@@ -17,7 +17,10 @@ app.use(function(req, res, next) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      res.render('index', { app: renderToString(<RoutingContext {...renderProps} />) });
+      res.render('index', {
+        assetUrl: process.env.ASSET_URL || "http://localhost:8080",
+        app: renderToString(<RoutingContext {...renderProps} />)
+      });
     } else {
       res.status(404).send('Not Found');
     }
