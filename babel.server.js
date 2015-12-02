@@ -4,4 +4,8 @@ require('babel-core/register')({
 });
 
 // Run the server
-require('./server/app');
+try {
+  require('./server/app');
+} catch(error) {
+  console.error(error.stack);
+}

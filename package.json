@@ -2,10 +2,11 @@
   "name": "my-express-react",
   "version": "1.0.0",
   "description": "Express + React",
+  "repository": "https://github.com/Jormundir/react-foundation.git",
   "main": "index.js",
   "scripts": {
     "start": "NODE_PATH=./app node ./babel.server.js",
-    "develop": "start dev and node server",
+    "develop": "NODE_PATH=./app node ./node_modules/concurrently/src/main.js --kill-others \"node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.dev.js\" \"./node_modules/nodemon/bin/nodemon.js ./babel.server.js\"",
     "bundle": "create production bundle",
     "test": "NODE_PATH=./app jest"
   },
@@ -15,16 +16,20 @@
     "babel-core": "^6.1.21",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
+    "css-loader": "^0.23.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "history": "^1.13.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
-    "react-router": "^1.0.0"
+    "react-router": "^1.0.0",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0"
   },
   "devDependencies": {
     "babel-jest": "^6.0.1",
     "babel-loader": "^6.2.0",
+    "concurrently": "^1.0.0",
     "jest-cli": "^0.7.1",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.14.0"
