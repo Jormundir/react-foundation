@@ -1,7 +1,5 @@
 import React from 'react';
 
-require('./App.css');
-
 class App extends React.Component {
   stuff() {
     alert("hello");

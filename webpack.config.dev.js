@@ -1,18 +1,11 @@
-var path = require('path');
 var webpack = require('webpack');
+var path = require('path');
+var merge = require('lodash').merge;
+var fs = require('fs');
 
-module.exports = {
-  context: path.join(__dirname, 'app'),
-  entry: [
-    "webpack-dev-server/client?http://localhost:8080",
-    "webpack/hot/dev-server",
-    './Client'
-  ],
-  stats: {
-    colors: true,
-    reasons: true,
-    timings: true
-  },
+
+var config = {
+  context: __dirname,
   module: {
     loaders: [
       {
@@ -24,28 +17,46 @@ module.exports = {
         }
       },
       {
-        test: /\.s?css$/,
-        loaders: ['style', 'css', 'sass']
+        test: /\.ejs$/,
+        exlucde: /node_modules/,
+        loader: 'file?name=views/[name].[ext]'
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modulesDirectories: ['node_modules', 'app']
-  },
-  output: {
-    path: path.join(__dirname, 'build', 'scripts'),
-    publicPath: 'http://localhost:8080/assets/scripts/',
-    filename: 'bundle.js'
-  },
-  devServer: {
-    contentBase: 'build',
-    hot: true,
-    inline: true,
-    historyApiFallback: true,
-    quiet: true
   }
 };
+
+var client = merge({}, config, {
+  entry: './app/Client',
+  output: {
+    path: path.join(__dirname, 'build', 'assets'),
+    filename: 'bundle.js'
+  }
+});
+
+
+// Hack to make webpack compatible on the node server side (express in particular).
+// Tells webpack not to touch node_modules in require statements.
+var nodeModules = {};
+fs.readdirSync('node_modules')
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
+  });
+
+var server = merge({}, config, {
+  entry: './server/App',
+  output: {
+    path: path.join(__dirname, 'build', 'server'),
+    filename: 'app.js'
+  },
+  target: 'node',
+  externals: nodeModules
+});
+
+module.exports = [client, server];

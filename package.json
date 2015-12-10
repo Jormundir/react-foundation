@@ -5,9 +5,10 @@
   "repository": "https://github.com/Jormundir/react-foundation.git",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=./app node ./babel.server.js",
-    "develop": "NODE_PATH=./app node ./node_modules/concurrently/src/main.js --kill-others \"node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.dev.js\" \"./node_modules/nodemon/bin/nodemon.js ./babel.server.js\"",
-    "bundle": "create production bundle",
+    "bundle:development": "create development bundle",
+    "bundle:production": "create production ready bundle",
+    "start": "node ./build/server.js",
+    "develop": "node ./node_modules/concurrently/src/main.js --kill-others \"node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.dev.js\" \"./node_modules/nodemon/bin/nodemon.js ./babel.server.js\"",
     "test": "NODE_PATH=./app jest"
   },
   "author": "Charles Bryan",
@@ -30,7 +31,10 @@
     "babel-jest": "^6.0.1",
     "babel-loader": "^6.2.0",
     "concurrently": "^1.0.0",
+    "file-loader": "^0.8.5",
     "jest-cli": "^0.7.1",
+    "lodash": "^3.10.1",
+    "node-sass": "^3.4.2",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.14.0"
   },

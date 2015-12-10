@@ -4,11 +4,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import routes from 'Routes';
+import './views/index.ejs';
 
 var app = express();
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 app.use(function(req, res, next) {
   match({ routes, location: req.url }, function(error, redirectLocation, renderProps) {
