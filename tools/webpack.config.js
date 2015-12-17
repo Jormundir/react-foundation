@@ -6,16 +6,13 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 var config = {
-  context: __dirname,
+  context: path.join(__dirname, '..'),
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel', query: { presets: ['react', 'es2015'] } },
       { test: /\.s?css$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style', 'css', 'sass') }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin('app.css')
-  ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modulesDirectories: ['node_modules', 'app']
@@ -28,18 +25,22 @@ var client = merge({}, config, {
     './app/Client'
   ],
   output: {
-    path: path.join(__dirname, 'build', 'assets'),
+    path: path.join(__dirname, '..', 'build', 'assets'),
     filename: 'app.js',
     publicPath: '/assets/'
   },
+  plugins: [
+    new ExtractTextPlugin('app.css')
+  ],
   devServer: {
     quiet: true,
-    contentBase: path.join(__dirname, 'build', 'assets')
+    contentBase: path.join(__dirname, '..', 'build', 'assets')
   }
 });
 
 
-// Hack to make webpack compatible on the node server side (express in particular).
+// HACK
+// To make webpack compatible on the node server side (express in particular).
 // Tells webpack not to touch node_modules in require statements.
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -49,16 +50,17 @@ fs.readdirSync('node_modules')
   .forEach(function(mod) {
     nodeModules[mod] = 'commonjs ' + mod;
   });
+// ENDHACK
 
 var server = merge({}, config, {
   entry: './server/App',
   output: {
-    path: path.join(__dirname, 'build', 'server'),
+    path: path.join(__dirname, '..', 'build', 'server'),
     filename: 'app.js'
   },
-  module: {
-    noParse: /\.s?css$/
-  },
+  plugins: [
+    new ExtractTextPlugin('')
+  ],
   target: 'node',
   node: {
     console: false,

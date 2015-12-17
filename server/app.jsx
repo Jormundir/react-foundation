@@ -4,7 +4,6 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import routes from 'Routes';
-import './views/index.ejs';
 
 var app = express();
 

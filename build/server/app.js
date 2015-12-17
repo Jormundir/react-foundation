@@ -66,8 +66,6 @@
 
 	var _Routes2 = _interopRequireDefault(_Routes);
 
-	__webpack_require__(158);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var app = (0, _express2.default)();
@@ -18758,7 +18756,7 @@
 	      return _react2.default.createElement(
 	        'h1',
 	        { onClick: this.stuff },
-	        'Hello, Stuff!'
+	        'Hello, people!'
 	      );
 	    }
 	  }]);
@@ -18773,15 +18771,6 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "views/index.ejs";
 
 /***/ }
 /******/ ]);
