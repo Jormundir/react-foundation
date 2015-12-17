@@ -18756,7 +18756,7 @@
 	      return _react2.default.createElement(
 	        'h1',
 	        { onClick: this.stuff },
-	        'Hello, people!'
+	        'Hello, World!'
 	      );
 	    }
 	  }]);

@@ -8,7 +8,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <h1 onClick={this.stuff}>Hello, people!</h1>
+      <h1 onClick={this.stuff}>Hello, World!</h1>
     );
   }
 }

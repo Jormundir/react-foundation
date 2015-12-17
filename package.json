@@ -5,8 +5,8 @@
   "repository": "https://github.com/Jormundir/react-foundation.git",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/server.js",
-    "develop": "node ./node_modules/concurrently/src/main.js --kill-others \"node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --config webpack.config.dev.js\" \"./node_modules/nodemon/bin/nodemon.js ./build/server/app.js\"",
+    "start": "node ./build/server/app.js",
+    "develop": "node ./node_modules/concurrently/src/main.js --kill-others \"node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --config ./tools/webpack.config.js\" \"./node_modules/nodemon/bin/nodemon.js ./build/server/app.js\"",
     "test": "NODE_PATH=./app jest"
   },
   "author": "Charles Bryan",

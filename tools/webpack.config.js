@@ -26,21 +26,22 @@ var client = merge({}, config, {
   ],
   output: {
     path: path.join(__dirname, '..', 'build', 'assets'),
-    filename: 'app.js',
-    publicPath: '/assets/'
+    publicPath: '/assets/',
+    filename: 'app.js'
   },
   plugins: [
     new ExtractTextPlugin('app.css')
   ],
   devServer: {
+    contentBase: path.join(__dirname, '..', 'build', 'assets'),
     quiet: true,
-    contentBase: path.join(__dirname, '..', 'build', 'assets')
+    historyApiFallback: true
   }
 });
 
 
 // HACK
-// To make webpack compatible on the node server side (express in particular).
+// Make webpack compatible on the node server side (express in particular).
 // Tells webpack not to touch node_modules in require statements.
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -59,7 +60,7 @@ var server = merge({}, config, {
     filename: 'app.js'
   },
   plugins: [
-    new ExtractTextPlugin('')
+    new ExtractTextPlugin('app.css')
   ],
   target: 'node',
   node: {
