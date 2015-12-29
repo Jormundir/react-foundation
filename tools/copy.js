@@ -1,3 +1,10 @@
+//
+// Copy server views into the build directory
+//
+// We do this with a separate script because they don't
+// need to go through webpack.
+//
+
 var fse = require('fs-extra');
 var path = require('path');
 

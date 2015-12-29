@@ -1,3 +1,7 @@
+//
+// Create webpack bundles for both browser and server
+//
+
 var path = require('path');
 
 var webpack = require('webpack');
