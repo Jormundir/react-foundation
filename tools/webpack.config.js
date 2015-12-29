@@ -26,23 +26,18 @@ var client = merge({}, config, {
   ],
   output: {
     path: path.join(__dirname, '..', 'build', 'assets'),
-    publicPath: '/assets/',
     filename: 'app.js'
   },
   plugins: [
     new ExtractTextPlugin('app.css')
-  ],
-  devServer: {
-    contentBase: path.join(__dirname, '..', 'build', 'assets'),
-    quiet: true,
-    historyApiFallback: true
-  }
+  ]
 });
 
 
 // HACK
 // Make webpack compatible on the node server side (express in particular).
-// Tells webpack not to touch node_modules in require statements.
+// Tells webpack not to include binaries in the bundle (they're not valid
+// node scripts, throwing errors when they're loaded at runtime).
 var nodeModules = {};
 fs.readdirSync('node_modules')
   .filter(function(x) {
