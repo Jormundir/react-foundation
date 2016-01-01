@@ -10,18 +10,24 @@ module.exports = function() {
   var path = require('path');
   var webpack = require('webpack');
   var serverConfig = require('./webpack.config.js')[1];
+  var nodemonRunning = false;
 
   var compiler = webpack(serverConfig);
 
   compiler.watch({}, function(error, stats) {
     if (error) {
-      console.error(error);
-    } else {
-      console.log('Server build complete');
+      return console.error(error);
+    }
+
+    console.log('Server build complete');
+
+    if (!nodemonRunning) {
+      nodemonRunning = true;
+
       console.log('Starting nodemon express server');
       nodemon({
         script: path.join(__dirname, '..', 'build', 'server', 'app.js'),
-        watch: [path.join(__dirname, '..', 'build', 'server', 'app.js')]
+        watch: [path.join(__dirname, '..', 'build', 'server', '*')]
       });
     }
   });

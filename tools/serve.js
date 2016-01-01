@@ -1,5 +1,5 @@
 //
-// Start a webpack-dev-server to serve build with
+// Start a webpack-dev-server to serve the build with
 // hot module replacement.
 //
 // Exported function so it can be run in parallel
