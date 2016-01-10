@@ -5,17 +5,22 @@
 //
 
 var path = require('path');
-var async = require('async');
+var childProcess = require('child_process');
+
+
+function start_process() {
+  var child = childProcess.spawn.apply(this, arguments);
+  child.stdout.on('data', function(data) {
+    process.stdout.write(data);
+  });
+  child.stderr.on('data', function(data) {
+    process.stderr.write(data);
+  });
+}
 
 
 require(path.join(__dirname, 'clean'));
 require(path.join(__dirname, 'copy'));
 
-async.parallel([
-  require(path.join(__dirname, 'watch')),
-  require(path.join(__dirname, 'serve'))
-], function(err, results) {
-  if (err) {
-    console.error(err);
-  }
-});
+start_process('node', [path.join(__dirname, 'watch')]);
+start_process('node', [path.join(__dirname, 'serve')]);
