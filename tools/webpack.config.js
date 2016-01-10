@@ -10,7 +10,7 @@ var config = {
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel', query: { presets: ['react', 'es2015'] } },
-      { test: /\.s?css$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style', 'css', 'sass') }
+      { test: /\.s?css$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules', 'sass-loader') }
     ]
   },
   resolve: {
